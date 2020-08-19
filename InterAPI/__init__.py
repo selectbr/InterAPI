@@ -3,7 +3,7 @@ import datetime
 
 import requests
 
-from BancoAPI.validate import check_pagador, check_desconto
+from .validate import check_pagador, check_desconto
 
 
 class ApiInter:

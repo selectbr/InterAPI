@@ -1,5 +1,4 @@
 from datetime import datetime
-
 from .Exceptions import *
 
 _UF = {"RO", "AC", "AM", "RR", "PA", "AP", "TO", "MA", "PI", "CE", "RN", "PB", "PE", "AL",
