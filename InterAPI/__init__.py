@@ -56,7 +56,7 @@ class ApiInter:
             url=self._URL_BOLETOS,
             params=params,
             verify=False,
-            cert=['certificado.pem', 'private-key.pem'],
+            cert=[self.CERT_CRT, self.CERT_KEY],
             headers=self._DEFAULT_HEADERS
         )
 
@@ -130,7 +130,7 @@ class ApiInter:
             url=self._URL_BOLETOS,
             data=json.dumps(data),
             verify=False,
-            cert=['certificado.pem', 'private-key.pem'],
+            cert=[self.CERT_CRT, self.CERT_KEY],
             headers=self._DEFAULT_HEADERS
         )
 
@@ -143,7 +143,7 @@ class ApiInter:
         r = requests.get(
             url=url,
             verify=False,
-            cert=['certificado.pem', 'private-key.pem'],
+            cert=[self.CERT_CRT, self.CERT_KEY],
             headers=self._DEFAULT_HEADERS
         )
 
