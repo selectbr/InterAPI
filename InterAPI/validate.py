@@ -71,8 +71,6 @@ def check_pagador(pagador=None):
     if not pagador["uf"].upper() in _UF:
         raise PagadorInvalido(f"ud invalido, valores aceitos: {_UF.__str__()}")
 
-    return True
-
 
 def check_mensagem(mensagem=None):
     if mensagem is not None:
@@ -82,8 +80,6 @@ def check_mensagem(mensagem=None):
         for m in mensagem:
             if len(m) > 78:
                 raise MuitosCaracteres("Máximo de caracteres 78")
-
-    return True
 
 
 def check_desconto(desconto=None):
@@ -112,8 +108,6 @@ def check_desconto(desconto=None):
                                       'PERCENTUALVALORNOMINALDIAUTIL'):
         if "taxa" in desconto:
             raise DescontoInvalido(f"taxa obrigatoria quando codigoDesconto = {desconto['codigoDesconto']}")
-
-    return True
 
 
 def check_multa(multa=None, vencimento=None):

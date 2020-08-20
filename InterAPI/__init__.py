@@ -3,7 +3,7 @@ import datetime
 
 import requests
 
-from .validate import check_pagador, check_desconto
+from .validate import check_pagador, check_desconto, check_multa, check_mora
 
 
 class ApiInter:
@@ -60,7 +60,7 @@ class ApiInter:
             headers=self._DEFAULT_HEADERS
         )
 
-        return self._default_response(r)
+        return r
 
     def emitir_boleto(self, valor_nominal, cnpj_cpf_beneficiario, num, desconto1=None, valor_abatimento=0,
                       desconto2=None, desconto3=None, num_dias_agenda="SESSENTA", data_emissao=datetime.date.today(),
@@ -81,6 +81,8 @@ class ApiInter:
             }
         if pagador is None:
             pagador = {}
+
+        check_pagador(pagador)
 
         data_limite = num_dias_agenda
 
@@ -109,13 +111,20 @@ class ApiInter:
                 "data": "",
             }
         data["desconto3"] = desconto3
-        if desconto1 is None:
+        if desconto3 is None:
             data["desconto3"] = {
                 "codigoDesconto": "NAOTEMDESCONTO",
                 "taxa": 0,
                 "valor": 0,
                 "data": "",
             }
+
+        check_desconto(desconto1)
+        check_desconto(desconto2)
+        check_desconto(desconto3)
+        check_multa(multa)
+        check_mora(mora)
+
         data["valorNominal"] = valor_nominal
         data["valorAbatimento"] = valor_abatimento
         data["multa"] = multa
@@ -134,7 +143,7 @@ class ApiInter:
             headers=self._DEFAULT_HEADERS
         )
 
-        return self._default_response(r)
+        return r
 
     def get_pdf(self, nosso_numero):
         url = f"https://apis.bancointer.com.br:8443/openbanking/v1/certificado/boletos/{nosso_numero}/pdf"
@@ -147,4 +156,4 @@ class ApiInter:
             headers=self._DEFAULT_HEADERS
         )
 
-        return self._default_response(r, False)
+        return r

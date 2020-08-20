@@ -5,7 +5,7 @@ l = f.read()
 
 setup(
     name='InterAPI',
-    version='0.0.2',
+    version='0.0.6',
     packages=['InterAPI'],
     url='https://github.com/btmluiz/InterAPI',
     license=l,
